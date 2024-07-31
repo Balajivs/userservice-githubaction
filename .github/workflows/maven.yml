@@ -13,7 +13,6 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
 jobs:
   build:
 
@@ -21,7 +20,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Checkout code
       uses: actions/setup-java@v4
       with:
         java-version: '17'
