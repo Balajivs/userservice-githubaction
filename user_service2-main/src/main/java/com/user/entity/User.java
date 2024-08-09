@@ -1,81 +1,81 @@
 package com.user.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "userInfo")
 public class User {
 
-	
-	private Long userId;
+	@Id
+	@Column(name = "userId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer userId;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "phone")
 	private String phone;
-	
-	
-	List<Contact> contacts = new ArrayList<Contact>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Product> products;
+//	List<Contact> contacts = new ArrayList<Contact>();
 
 	
-	public User() {
-		super();
-	}
-
-
-	public User(Long userId, String name, String phone, List<Contact> contacts) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.phone = phone;
-		this.contacts = contacts;
-	}
-
-
-	public User(Long userId, String name, String phone) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.phone = phone;
-	}
-
-
-	public Long getUserId() {
-		return userId;
-	}
-
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
-
+	
 	public String getName() {
 		return name;
 	}
 
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	 public void setProducts(List<Product> products) {
+	        this.products = products;
+	        for (Product product : products) {
+	            product.setUser(this);  // Set the user in each product
+	        }
+	    }
+
+	public User() {
+		
+		
+	}
+	public User(Integer userId, String name, String phone) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.phone = phone;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getPhone() {
 		return phone;
 	}
-
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-
-	public List<Contact> getContacts() {
-		return contacts;
-	}
-
-
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
-	}
-	
-	
-	
-	
 }

@@ -4,7 +4,6 @@ package com.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,7 +25,7 @@ public class ProductsController {
 
 
     @Autowired
-    @Qualifier(value="productService")
+  //  @Qualifier(value="productService")
     ProductService productService;
 
     @PostMapping(value="/saveProduct", consumes = {MediaType.APPLICATION_JSON_VALUE})
