@@ -1,6 +1,7 @@
 package com.user.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,8 +17,8 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	@Column(name = "userId")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userId", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
 
 	@Column(name = "name")
@@ -26,26 +27,40 @@ public class User {
 	@Column(name = "phone")
 	private String phone;
 
+	//@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	//@OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
+	//@JoinColumn(name="userproduct_fk",referencedColumnName = "id")
+	//private List<Product> products;
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Product> products;
-//	List<Contact> contacts = new ArrayList<Contact>();
+    private Set<Product> products = new HashSet<>();
+	
+	
+	
+	
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name = "product_id") private Product product;
+	 */
 
 	
 	
+
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
 	public String getName() {
 		return name;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	 public void setProducts(List<Product> products) {
-	        this.products = products;
-	        for (Product product : products) {
-	            product.setUser(this);  // Set the user in each product
-	        }
+	 public Set<Product> getProducts() {
+	        return products;
 	    }
+
+	 
 
 	public User() {
 		

@@ -13,8 +13,8 @@ import javax.persistence.Table;
 @Table(name="Product_info")
 public class Product {
     @Id
-    @Column(name="product_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name="product_name")
@@ -25,7 +25,7 @@ public class Product {
     
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+     private User user;
 
     public Product() {
     }
@@ -60,13 +60,7 @@ public class Product {
         this.price = price;
     }
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 
 	
     

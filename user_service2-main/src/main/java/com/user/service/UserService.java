@@ -2,6 +2,8 @@ package com.user.service;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.user.entity.User;
 
 public interface UserService {
@@ -13,4 +15,10 @@ public interface UserService {
 	
 	
 	List<User> getAllUser();
+	
+	//List<User>  findUserDetailsByUerId(Integer id);
+	
+	User updateUser(Integer id,User user);
+	
+	public String deleteUser(Integer id);
 }

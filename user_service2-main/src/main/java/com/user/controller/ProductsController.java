@@ -28,18 +28,18 @@ public class ProductsController {
   //  @Qualifier(value="productService")
     ProductService productService;
 
-    @PostMapping(value="/saveProduct", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value="/saveProduct")
     @ResponseStatus(code= HttpStatus.CREATED)
     public Product saveProduct(@RequestBody Product product){
         return productService.addProduct(product);
     }
 
-    @GetMapping(value = "/getProductbyId/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/getProductbyId/{id}")
     public Product getProductById(@PathVariable("id") Integer id){
         return productService.getProductbyId(id);
     }
 
-    @PutMapping(value="/updateProduct",consumes = {MediaType.APPLICATION_JSON_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value="/updateProduct")
     @ResponseStatus(code=HttpStatus.OK)
     Product updateProduct(@RequestBody Product product){
      return productService.updateProduct(product);
@@ -55,13 +55,13 @@ public class ProductsController {
     
     
     
-    @PostMapping(value="/addProduct",consumes=MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value="/addProduct")
     public Product aaddProduct(@RequestBody Product product) {
     	
     	return productService.addProduct(product);
     }
     
-    @GetMapping(value="/getAllProduct",produces= {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value="/getAllProduct")
     public List<Product> getAllProduct(){
     	
     	return productService.getAllProduct();
